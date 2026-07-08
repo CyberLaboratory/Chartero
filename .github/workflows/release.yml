@@ -3,7 +3,7 @@ name: Release
 on:
     push:
         tags:
-            - v**
+            - '*'
     workflow_dispatch:
 
 permissions:
@@ -14,9 +14,6 @@ permissions:
 jobs:
     release:
         runs-on: ubuntu-latest
-        env:
-            GITEE_TOKEN: ${{ secrets.Gitee_TOKEN }}
-            GITHUB_TOKEN: ${{ secrets.GitHub_TOKEN }}
         steps:
             - uses: actions/checkout@v4
               with:
@@ -29,7 +26,25 @@ jobs:
 
             - run: npm ci --registry=https://registry.npmjs.org/
             - run: npm run build
-            - run: npm run release
+
+            - name: Publish external release metadata
+              if: ${{ secrets.Gitee_TOKEN != '' }}
+              run: npm run release
+              env:
+                  GITEE_TOKEN: ${{ secrets.Gitee_TOKEN }}
+
+            - name: Publish GitHub release assets
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: ${{ github.ref_name }}
+                  name: Release ${{ github.ref_name }}
+                  generate_release_notes: true
+                  fail_on_unmatched_files: true
+                  files: |
+                      build/chartero.xpi
+                      build/update.json
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Notify release
               uses: apexskier/github-release-commenter@v1
