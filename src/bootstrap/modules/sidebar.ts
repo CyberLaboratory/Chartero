@@ -24,7 +24,7 @@ export function registerPanels() {
                 (target as Document).defaultView!.postMessage(message, '*'), true);
         addon.log(message, iframe.contentDocument?.readyState);
     }
-    const tabs = ['progress', 'page', 'date', 'group', /*'relation',*/ 'timeline'];
+    const tabs = ['progress', 'page', 'date', 'table', 'group', /*'relation',*/ 'timeline'];
 
     Zotero.ItemPaneManager.registerSection({
         paneID: 'chartero-dashboard',
