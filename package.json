@@ -28,7 +28,6 @@
         "build-watch": "tsx tools/build.ts --watch",
         "build-watch-full": "tsx tools/build.ts --watch --full",
         "dev": "vite ./src/vue/test",
-        "release": "tsx tools/release.ts",
         "preview": "vite preview ./src/vue",
         "lint": "eslint . --ext .vue,.ts,.tsx,.js --fix",
         "git-modules": "git submodule update --init --recursive",
