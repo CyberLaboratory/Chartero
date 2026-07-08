@@ -1,6 +1,6 @@
 import { AttachmentRecord } from '$/history/data';
 import type { AttachmentHistory } from '$/history/history';
-import localeJSON from '../../../../addon/locale/zh-CN/chartero.json';
+import localeJSON from '../../../../addon/locale/en-US/chartero.json';
 import fetchSync from './fetch';
 
 function createAttachmentHistory(his: AttachmentHistory): AttachmentHistory {

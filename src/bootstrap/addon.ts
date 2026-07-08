@@ -29,7 +29,7 @@ export default class Addon extends BasicTool {
         `resource://${packageName}/${config.addonName}-worker.mjs`,
         { type: 'module' }
     ));
-    readonly locale: typeof import('../../addon/locale/zh-CN/chartero.json');
+    readonly locale: typeof import('../../addon/locale/en-US/chartero.json');
 
     readonly rootURI = rootURI;
     overviewTabID?: string;
@@ -70,11 +70,11 @@ export default class Addon extends BasicTool {
             return this.locale;
         }
         const locale = JSON.parse(
-            Zotero.File.getContentsFromURL(rootURI + 'locale/zh-CN/chartero.json')
+            Zotero.File.getContentsFromURL(rootURI + 'locale/en-US/chartero.json')
         ), translate = (str: string) =>
             str.startsWith('http') ? str : (Zotero as any).PDFTranslate.api.translate(str, {
                 pluginID: config.addonID,
-                langfrom: 'zh-CN',
+                langfrom: 'en-US',
                 langto: Zotero.locale
             }).then(
                 (res: _ZoteroTypes.anyObj) => res.status == 'success' ? res.result : str

@@ -27,6 +27,8 @@
 
   <DateTime v-show="activeTab == SectionTab.Date" :history="itemHistory" :theme="chartTheme" />
 
+  <ReadTable v-show="activeTab == SectionTab.Table" :history="itemHistory" />
+
   <UserPie v-show="activeTab == SectionTab.Group" :history="itemHistory" :theme="chartTheme" />
 
   <Network
@@ -42,6 +44,7 @@ import { nextTick } from 'vue';
 import { GridLightTheme, DarkUnicaTheme } from '@/themes';
 import PageTime from './components/pageTime.vue';
 import DateTime from './components/dateTime.vue';
+import ReadTable from './components/readTable.vue';
 import TimeLine from './components/timeline.vue';
 import Network from './components/network.vue';
 import UserPie from './components/userPie.vue';
@@ -54,13 +57,14 @@ enum SectionTab {
     Bubble = 'bubble',
     Page = 'page',
     Date = 'date',
+    Table = 'table',
     Group = 'group',
     Relation = 'relation',
     Timeline = 'timeline',
 }
 
 export default {
-    components: { PageTime, DateTime, TimeLine, Network, UserPie },
+    components: { PageTime, DateTime, ReadTable, TimeLine, Network, UserPie },
     data() {
         return {
             dark: false,
